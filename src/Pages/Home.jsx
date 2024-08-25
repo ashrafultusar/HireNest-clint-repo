@@ -1,9 +1,12 @@
-import React from 'react';
+
+import Carousel from '../Component/Carousel';
+import TabCatagorey from '../Component/TabCatagorey';
 
 const Home = () => {
     return (
         <div>
-            
+            {/* <Carousel></Carousel> */}
+            <TabCatagorey></TabCatagorey>
         </div>
     );
 };
