@@ -1,8 +1,20 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Jobcard from "./Jobcard";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const TabCatagorey = ({ jobs }) => {
+const TabCatagorey = () => {
+  const [jobs, setJob]  = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios(`${import.meta.env.VITE_API_URL}/jobs`);
+      setJob(data);
+    };
+    getData();
+  }, []);
+
   return (
     <div>
       <Tabs>
