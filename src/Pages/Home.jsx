@@ -1,12 +1,15 @@
 
-import Carousel from '../Component/Carousel';
+import { useLoaderData } from 'react-router-dom';
 import TabCatagorey from '../Component/TabCatagorey';
 
 const Home = () => {
+    const jobs = useLoaderData()
+    console.log(jobs);
+
     return (
         <div>
             {/* <Carousel></Carousel> */}
-            <TabCatagorey></TabCatagorey>
+            <TabCatagorey jobs={jobs}></TabCatagorey>
         </div>
     );
 };
