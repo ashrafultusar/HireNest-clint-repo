@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Jobcard = ({job}) => {
-const {category,job_title,description,min_price,max_price}=job||{}
+    const { category, job_title, description, min_price, max_price, _id } =job||{}
 
   return (
-    <div className="w-full max-w-sm px-4 py-3 bg-white rounded-md shadow-md hover:scale-[1.05] transition-all">
+    <Link to={`/job/${_id}`} className="w-full max-w-sm px-4 py-3 bg-white rounded-md shadow-md hover:scale-[1.05] transition-all">
       <div className="flex items-center justify-between">
         <span className="text-xs font-light text-gray-800 ">
           Deadline: {new Date("deadline").toLocaleDateString()}
@@ -26,7 +27,7 @@ const {category,job_title,description,min_price,max_price}=job||{}
           Range: ${min_price} - ${max_price}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
