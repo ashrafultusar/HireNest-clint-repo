@@ -20,17 +20,18 @@ const JobDetails = () => {
     max_price,
     _id,
     buyer,
-    buyer_email,
   } = job || {};
 
   // console.log(buyer_email);
   const handleFormSubmission = async (e) => {
-    if(user?.email===buyer_email) return toast.error("Action not permitted")
     e.preventDefault();
+    if (user?.email === buyer?.email)
+      return toast.error("Action not permitted");
     const form = e.target;
     const jobId = _id;
     const price = parseFloat(form.price.value);
-    if(price<parseFloat(min_price)) return toast.error('Offer more or at least to Minimum Price')
+    if (price < parseFloat(min_price))
+      return toast.error("Offer more or at least to Minimum Price");
     const comment = form.comment.value;
     const deadline = startDate;
     const email = user?.email;
@@ -53,11 +54,12 @@ const JobDetails = () => {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/bid`,
         bidData
-      )
-      console.log(data)
+      );
+      console.log(data);
+      toast.success("Bid successfully");
     } catch (err) {
-      console.log(err)
-      console.log('Hi, i am error', err.message)
+      console.log(err);
+      console.log("Hi, i am error", err.message);
     }
   };
 
