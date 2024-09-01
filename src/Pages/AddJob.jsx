@@ -11,8 +11,8 @@ const AddJob = () => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date());
 
-    const handleFormSubmission = async (e) => {
-        e.preventDefault();
+  const handleFormSubmission = async (e) => {
+    e.preventDefault();
     const form = e.target;
     const job_title = form.job_title.value;
     const email = form.email.value;
@@ -29,22 +29,21 @@ const AddJob = () => {
       min_price,
       max_price,
       description,
-        buyer: {
-            email,
-            name: user?.displayName,
-            photo: user?.photoURL
+      buyer: {
+        email,
+        name: user?.displayName,
+        photo: user?.photoURL,
       },
-      };
-      
+    };
 
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/job`,
         jobData
       );
-        console.log(data);
-        toast.success("Job upload Successfully")
-        navigate('/my-posted-jobs')
+      console.log(data);
+      toast.success("Job upload Successfully");
+      navigate("/my-posted-jobs");
     } catch (err) {
       console.log(err);
       console.log("Hi, i am error", err.message);
