@@ -3,6 +3,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 
 const UpdateJob = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const UpdateJob = () => {
         jobData
       );
       console.log(data);
-      toast.success("Job upload Successfully");
+      toast.success("Update Successfully");
       navigate("/my-posted-jobs");
     } catch (err) {
       console.log(err);
@@ -68,7 +69,7 @@ const UpdateJob = () => {
             Update a Job
           </h2>
 
-          <form>
+          <form onSubmit={handleFormSubmission}>
             <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label className="text-gray-700 " htmlFor="job_title">
@@ -88,8 +89,9 @@ const UpdateJob = () => {
                   Email Address
                 </label>
                 <input
-                  id="emailAddress"
+                  id="email"
                   type="email"
+                  defaultValue={user?.email}
                   name="email"
                   disabled
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
@@ -129,6 +131,7 @@ const UpdateJob = () => {
                   id="min_price"
                   name="min_price"
                   type="number"
+                  defaultValue={min_price}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
@@ -141,6 +144,7 @@ const UpdateJob = () => {
                   id="max_price"
                   name="max_price"
                   type="number"
+                  defaultValue={max_price}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
@@ -153,6 +157,7 @@ const UpdateJob = () => {
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 name="description"
                 id="description"
+                defaultValue={description}
                 cols="30"
               ></textarea>
             </div>
