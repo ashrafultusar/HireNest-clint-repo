@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, replace, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/login.jpg";
 import logo from "../../assets/images/logo.png";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -8,34 +8,33 @@ import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const { signIn, signInWithGoogle } = useContext(AuthContext);
-
+  const location = useLocation();
+  const from = location.state||'/'
   // email password sign in
-  const handleSignIn = async e => {
-    e.preventDefault()
-    const from = e.target
-    const email = from.email.value
-    const password=from.password.value
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const email = from.email.value;
+    const password = from.password.value;
     console.log(email, password);
     try {
       //User Login
-      const result = await signIn(email, password)
-      console.log(result.user)
-      navigate('/')
-      toast.success('Signin Successful')
+      const result = await signIn(email, password);
+      console.log(result.user);
+      navigate(from, {replace:true});
+      toast.success("Signin Successful");
     } catch (err) {
-      console.log(err)
-      toast.error(err?.message)
+      console.log(err);
+      toast.error(err?.message);
     }
-    
-}
-
+  };
 
   // google sign in
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
       // toast.success("Signin successfully");
-      navigate("/");
+      navigate(from, {replace:true});
     } catch (err) {
       console.log(err);
       toast.err(err.message);

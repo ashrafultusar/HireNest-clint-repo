@@ -114,8 +114,8 @@ const UpdateJob = () => {
                 </label>
                 <select
                   name="category"
-                                  id="category"
-                                  defaultValue={category}
+                  id="category"
+                  defaultValue={category}
                   className="border p-2 rounded-md"
                 >
                   <option value="Web Development">Web Development</option>
