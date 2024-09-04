@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, replace, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/login.jpg";
 import logo from "../../assets/images/logo.png";
@@ -7,9 +7,16 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [navigate, user]);
+
   const location = useLocation();
-  const from = location.state||'/'
+  const from = location.state || "/";
   // email password sign in
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -21,7 +28,7 @@ const Login = () => {
       //User Login
       const result = await signIn(email, password);
       console.log(result.user);
-      navigate(from, {replace:true});
+      navigate(from, { replace: true });
       toast.success("Signin Successful");
     } catch (err) {
       console.log(err);
@@ -34,12 +41,14 @@ const Login = () => {
     try {
       await signInWithGoogle();
       // toast.success("Signin successfully");
-      navigate(from, {replace:true});
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
       toast.err(err.message);
     }
   };
+
+  if (user || loading) return;
 
   return (
     <div>

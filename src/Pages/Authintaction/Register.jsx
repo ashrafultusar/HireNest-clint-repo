@@ -1,16 +1,22 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/images/register.jpg'
 import logo from '../../assets/images/logo.png'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
 
 const Registration = () => {
   const navigate = useNavigate()
   const location = useLocation();
   const from = location.state||'/'
-  const { signInWithGoogle, createUser, updateUserProfile, user, setUser } =
+  const { signInWithGoogle, createUser, updateUserProfile, user, setUser,loading } =
     useContext(AuthContext)
+  useEffect(() => {
+    if (user || loading) {
+      navigate('/')
+    }
 
+  },[navigate,user])
+  
   const handleSignUp = async e => {
     e.preventDefault()
     const form = e.target
@@ -44,6 +50,7 @@ const Registration = () => {
       toast.error(err?.message)
     }
   }
+  if (user || loading) return;
 
   return (
     <div className='flex justify-center items-center min-h-[calc(100vh-306px)] my-12'>
