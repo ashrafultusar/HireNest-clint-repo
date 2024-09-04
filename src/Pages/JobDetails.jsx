@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const JobDetails = () => {
+  navigate=useNavigate()
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useContext(AuthContext);
   const job = useLoaderData();
@@ -57,6 +58,7 @@ const JobDetails = () => {
       );
       console.log(data);
       toast.success("Bid successfully");
+      navigate('/my-bids')
     } catch (err) {
       console.log(err);
       console.log("Hi, i am error", err.message);

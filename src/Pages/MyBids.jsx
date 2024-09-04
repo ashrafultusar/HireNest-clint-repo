@@ -17,6 +17,14 @@ const MyBids = () => {
     setBids(data);
   };
 
+  const handleStatus = async (id, status) => {
+    const { data } = await axios.patch(
+      `${import.meta.env.VITE_API_URL}/bid/${id}`,
+      { status } // Ensure status is sent as part of the request body
+    );
+    getData(); // Refresh data after the update
+  };
+
   return (
     <section className="container px-4 mx-auto pt-12">
       <div className="flex items-center gap-x-3">
@@ -78,6 +86,7 @@ const MyBids = () => {
                     </th>
                   </tr>
                 </thead>
+
                 <tbody className="bg-white divide-y divide-gray-200 ">
                   {bids.map((bid) => (
                     <tr key={bid._id}>
