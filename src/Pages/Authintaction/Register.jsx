@@ -3,6 +3,7 @@ import bgImg from '../../assets/images/register.jpg'
 import logo from '../../assets/images/logo.png'
 import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../Provider/AuthProvider'
+import axios from 'axios'
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -30,8 +31,18 @@ const Registration = () => {
       const result = await createUser(email, pass)
       console.log(result)
       await updateUserProfile(name, photo)
-      setUser({ ...user, photoURL: photo, displayName: name })
-      navigate(from, {replace:true});
+      // optimistic UI update
+      setUser({ ...result?.user, photoURL: photo, displayName: name })
+      
+        // code for token
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          { email: result?.user?.email },
+          { withCredentials: true }
+        );
+        // ----------
+      
+      navigate(from, { replace: true });
       // toast.success('Signup Successful')
     } catch (err) {
       console.log(err)
@@ -42,8 +53,17 @@ const Registration = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle()
+     const result= await signInWithGoogle()
       toast.success('Signin Successful')
+
+        // code for token
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          { email: result?.user?.email },
+          { withCredentials: true }
+        );
+      // ----------
+      
       navigate(from, {replace:true});
     } catch (err) {
       console.log(err)

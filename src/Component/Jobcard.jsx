@@ -15,7 +15,7 @@ const Jobcard = ({job}) => {
         </span>
       </div>
 
-      <div>
+      <div> 
         <h1 className="mt-2 text-lg font-semibold text-gray-800 ">
           {job_title}
         </h1>
