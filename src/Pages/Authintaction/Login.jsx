@@ -30,13 +30,13 @@ const Login = () => {
       const result = await signIn(email, password);
       console.log(result.user);
 
-  // code for token
-  const { data } = await axios.post(
-    `${import.meta.env.VITE_API_URL}/jwt`,
-    { email: result?.user?.email },
-    { withCredentials: true }
-  );
-  // ----------
+      // code for token
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        { email: result?.user?.email },
+        { withCredentials: true }
+      );
+      // ----------
 
       navigate(from, { replace: true });
       toast.success("Signin Successful");

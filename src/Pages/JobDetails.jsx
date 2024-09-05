@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const JobDetails = () => {
-  navigate=useNavigate()
+ const navigate=useNavigate()
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useContext(AuthContext);
   const job = useLoaderData();
