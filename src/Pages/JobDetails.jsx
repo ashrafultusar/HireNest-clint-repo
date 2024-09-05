@@ -5,8 +5,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const JobDetails = () => {
+  const axiosSecure=useAxiosSecure()
  const navigate=useNavigate()
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useContext(AuthContext);
@@ -52,8 +54,8 @@ const JobDetails = () => {
       buyer,
     };
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_URL}/bid`,
+      const { data } = await axiosSecure.post(
+        `/bid`,
         bidData
       );
       console.log(data);
@@ -61,7 +63,10 @@ const JobDetails = () => {
       navigate('/my-bids')
     } catch (err) {
       console.log(err);
+      // toast.error('You have already placed a bid on this job')
+      toast.error(err.response.data)
       console.log("Hi, i am error", err.message);
+      e.target.reset()
     }
   };
 
@@ -122,6 +127,7 @@ const JobDetails = () => {
                   id="price"
                   type="text"
                   name="price"
+                  required
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
                 />
               </div>
