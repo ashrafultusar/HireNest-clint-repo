@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   return (
-    <div className="navbar bg-base-100 shadow-sm container px-4 mx-auto">
+    <div className="navbar fixed z-10 bg-white-500 bg-opacity-70 backdrop-blur-md shadow-sm px-36 ">
       <div className="flex-1">
         <Link to="/" className="flex gap-2 items-center">
           <img className="w-auto h-7" src={logo} alt="" />

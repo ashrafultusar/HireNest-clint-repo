@@ -4,7 +4,7 @@ import video from "../assets/images/19722976-uhd_2560_1440_30fps.mp4";
 const Banner = () => {
   return (
     <div>
-      <div className="hero lg:h-[720px] md:h-[450px] container mx-auto relative">
+      <div className="hero lg:h-screen md:h-screen relative">
         {/* Video Background */}
         <video
           autoPlay
@@ -30,6 +30,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
+      
     </div>
   );
 };

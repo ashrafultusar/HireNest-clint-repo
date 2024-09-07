@@ -28,6 +28,9 @@ const Jobcard = ({job}) => {
         </p>
       </div>
     </Link>
+
+    
+    
   );
 };
 
